@@ -1,0 +1,2286 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_MANHOLE_SQL",
+      "label": "Manhole_sql",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "mysql",
+      "pluginName": "MySQL"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "aceiot-svg-panel",
+      "name": "ACE.SVG",
+      "version": "0.1.4"
+    },
+    {
+      "type": "panel",
+      "id": "canvas",
+      "name": "Canvas",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "geomap",
+      "name": "Geomap",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.2.3"
+    },
+    {
+      "type": "datasource",
+      "id": "mysql",
+      "name": "MySQL",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "volkovlabs-variable-panel",
+      "name": "Business Variable",
+      "version": "3.2.0"
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_MANHOLE_SQL}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 25,
+        "w": 1,
+        "x": 0,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "addAllIDs": false,
+        "captureMappings": false,
+        "eventSource": "",
+        "initSource": "",
+        "svgMappings": [
+          {
+            "mappedName": "barTwo",
+            "svgId": "rect4526"
+          },
+          {
+            "mappedName": "barThree",
+            "svgId": "rect4528"
+          },
+          {
+            "mappedName": "barFour",
+            "svgId": "rect4530"
+          },
+          {
+            "mappedName": "iconbg",
+            "svgId": "rect4522"
+          },
+          {
+            "mappedName": "spline",
+            "svgId": "path4538"
+          },
+          {
+            "mappedName": "barOne",
+            "svgId": "rect4524"
+          },
+          {
+            "mappedName": "fanBlades",
+            "svgId": "g1550"
+          },
+          {
+            "mappedName": "alarmIcon",
+            "svgId": "g1721"
+          },
+          {
+            "mappedName": "lampLens",
+            "svgId": "g1942"
+          },
+          {
+            "mappedName": "lampRays",
+            "svgId": "g1917"
+          },
+          {
+            "mappedName": "waterDrop",
+            "svgId": "g1995"
+          },
+          {
+            "mappedName": "alarmRings",
+            "svgId": "g1891"
+          }
+        ],
+        "svgSource": "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"fixed\" zoomAndPan=\"disable\" viewBox=\"0 0 30 599.999999\" height=\"fixed\" preserveAspectRatio=\"xMidYMid meet\" version=\"1.0\"><defs><clipPath id=\"51fe9ba44e\"><path d=\"M 15 0 C 23.285156 0 30 6.714844 30 15 L 30 584.929688 C 30 593.210938 23.285156 599.929688 15 599.929688 C 6.714844 599.929688 0 593.210938 0 584.929688 L 0 15 C 0 6.714844 6.714844 0 15 0 Z M 15 0 \" clip-rule=\"nonzero\"/></clipPath></defs><g clip-path=\"url(#51fe9ba44e)\"><path fill=\"#005085\" d=\"M 0 0 L 30 0 L 30 599.882812 L 0 599.882812 Z M 0 0 \" fill-opacity=\"1\" fill-rule=\"nonzero\"/></g></svg>"
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "dataset": "mpete_manhole",
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_MANHOLE_SQL}"
+          },
+          "editorMode": "builder",
+          "format": "table",
+          "rawSql": "",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "aceiot-svg-panel"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_MANHOLE_SQL}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "thresholdsStyle": {
+              "mode": "color",
+              "thresholds": []
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 3,
+        "x": 1,
+        "y": 0
+      },
+      "id": 15,
+      "options": {
+        "alwaysVisibleFilter": false,
+        "autoScroll": false,
+        "collapsedByDefault": false,
+        "customValue": true,
+        "displayMode": "minimize",
+        "emptyValue": false,
+        "favorites": false,
+        "filter": false,
+        "groupSelection": false,
+        "header": true,
+        "padding": 0,
+        "persistent": false,
+        "saveSelectedGroup": false,
+        "saveSelectedGroupKey": "",
+        "showGroupTotal": false,
+        "showLabel": true,
+        "showName": false,
+        "showResetButton": false,
+        "showTotal": false,
+        "statusSort": false,
+        "sticky": false,
+        "variable": "Device_MAP"
+      },
+      "pluginVersion": "3.2.0",
+      "targets": [
+        {
+          "dataset": "mpete_manhole",
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_MANHOLE_SQL}"
+          },
+          "editorMode": "builder",
+          "format": "table",
+          "rawSql": "",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "volkovlabs-variable-panel"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_MANHOLE_SQL}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "thresholdsStyle": {
+              "mode": "color",
+              "thresholds": []
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 7,
+        "x": 17,
+        "y": 0
+      },
+      "id": 13,
+      "options": {
+        "alwaysVisibleFilter": false,
+        "autoScroll": false,
+        "collapsedByDefault": false,
+        "customValue": true,
+        "displayMode": "minimize",
+        "emptyValue": false,
+        "favorites": false,
+        "filter": false,
+        "groupSelection": false,
+        "header": true,
+        "padding": 0,
+        "persistent": false,
+        "saveSelectedGroup": false,
+        "saveSelectedGroupKey": "",
+        "showGroupTotal": false,
+        "showLabel": true,
+        "showName": false,
+        "showResetButton": false,
+        "showTotal": false,
+        "statusSort": false,
+        "sticky": false,
+        "variable": "Device"
+      },
+      "pluginVersion": "3.2.0",
+      "targets": [
+        {
+          "dataset": "mpete_manhole",
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_MANHOLE_SQL}"
+          },
+          "editorMode": "builder",
+          "format": "table",
+          "rawSql": "",
+          "refId": "A"
+        }
+      ],
+      "transparent": true,
+      "type": "volkovlabs-variable-panel"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_MANHOLE_SQL}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Latitude"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 5
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Longitude"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 5
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Manhole Alert"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#01e6fa",
+                      "value": null
+                    },
+                    {
+                      "color": "#f0001c",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "index": 0,
+                        "text": "normal status"
+                      },
+                      "1": {
+                        "index": 1,
+                        "text": "alert status"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": true,
+                  "viz": false
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Water Level"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "unit",
+                "value": "cm"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Manhole Distance"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "cm"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 16,
+        "x": 1,
+        "y": 1
+      },
+      "id": 16,
+      "options": {
+        "basemap": {
+          "config": {},
+          "name": "Layer 0",
+          "opacity": 1,
+          "tooltip": false,
+          "type": "osm-standard"
+        },
+        "controls": {
+          "mouseWheelZoom": true,
+          "showAttribution": false,
+          "showDebug": false,
+          "showMeasure": false,
+          "showScale": false,
+          "showZoom": true
+        },
+        "layers": [
+          {
+            "config": {
+              "rules": [],
+              "src": "public/maps/MWA.geojson",
+              "style": {
+                "color": {
+                  "fixed": "#0cf2ec"
+                },
+                "opacity": 0.7,
+                "rotation": {
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "mod"
+                },
+                "size": {
+                  "fixed": 5,
+                  "max": 15,
+                  "min": 2
+                },
+                "symbol": {
+                  "fixed": "img/icons/marker/circle.svg",
+                  "mode": "fixed"
+                },
+                "symbolAlign": {
+                  "horizontal": "center",
+                  "vertical": "center"
+                },
+                "textConfig": {
+                  "fontSize": 12,
+                  "offsetX": 0,
+                  "offsetY": 0,
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              }
+            },
+            "name": "Layer 2",
+            "opacity": 0.4,
+            "tooltip": false,
+            "type": "geojson"
+          },
+          {
+            "config": {
+              "showLegend": false,
+              "style": {
+                "color": {
+                  "field": "Manhole Alert",
+                  "fixed": "red"
+                },
+                "opacity": 1,
+                "rotation": {
+                  "fixed": 0,
+                  "max": 360,
+                  "min": -360,
+                  "mode": "mod"
+                },
+                "size": {
+                  "fixed": 25,
+                  "max": 15,
+                  "min": 2
+                },
+                "symbol": {
+                  "fixed": "https://raw.githubusercontent.com/Achinya-m/Manhole/main/manhole_tag.svg",
+                  "mode": "fixed"
+                },
+                "symbolAlign": {
+                  "horizontal": "center",
+                  "vertical": "center"
+                },
+                "textConfig": {
+                  "fontSize": 12,
+                  "offsetX": 0,
+                  "offsetY": 0,
+                  "textAlign": "center",
+                  "textBaseline": "middle"
+                }
+              }
+            },
+            "filterData": {
+              "id": "byRefId",
+              "options": "A"
+            },
+            "location": {
+              "latitude": "Latitude",
+              "longitude": "Longitude",
+              "mode": "coords"
+            },
+            "name": "MANHOLE",
+            "tooltip": true,
+            "type": "markers"
+          }
+        ],
+        "tooltip": {
+          "mode": "details"
+        },
+        "view": {
+          "allLayers": true,
+          "id": "coords",
+          "lat": 13.756483696088525,
+          "lon": 100.58052082018985,
+          "shared": false,
+          "zoom": 10
+        }
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "dataset": "mpete_manhole",
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_MANHOLE_SQL}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \r\n    d.device AS Device,\r\n    s.location AS Location,\r\n    s.latitude AS Latitude,\r\n    s.longitude AS Longitude,\r\n    s.manhole_distance AS \"Manhole Distance\",\r\n    (s.manhole_distance - d.level) AS \"Water Level\",\r\n    CASE\r\n        WHEN d.cover = 1 THEN 'FAIL !'\r\n        WHEN d.cover = 0 THEN 'Normal'\r\n        ELSE 'Unknown'\r\n    END AS \"Cover Status\",\r\n    CASE\r\n        WHEN d.cover = 1 OR (s.manhole_distance - d.level) > 400 THEN 1\r\n        ELSE 0\r\n    END AS \"Manhole Alert\",\r\n    d.timestamp AS Timestamp\r\nFROM mpete_manhole.data d\r\nJOIN mpete_manhole.setup s\r\n    ON d.device = s.device\r\nWHERE d.timestamp = (\r\n    SELECT MAX(d2.timestamp)\r\n    FROM mpete_manhole.data d2\r\n    WHERE d2.device = d.device\r\n)\r\nAND d.device IN ($Device_MAP)\r\nORDER BY d.device ASC;\r\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [
+                  {
+                    "name": "id",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "device",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "hum",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "ang",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "lat",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "lon",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              },
+              {
+                "parameters": [
+                  {
+                    "name": "timestamp",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "mpete_manhole"
+        }
+      ],
+      "transparent": true,
+      "type": "geomap"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_MANHOLE_SQL}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#ffffff00",
+                "value": null
+              },
+              {
+                "color": "#a8edeb",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cover Status"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "color": "#bfbfbff7",
+                        "index": 1,
+                        "text": "Normal"
+                      },
+                      "1": {
+                        "color": "#fb021f",
+                        "index": 0,
+                        "text": "FAIL !"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Water Level Bar 1"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#0d0c0c21",
+                      "value": null
+                    },
+                    {
+                      "color": "#a8edeb",
+                      "value": -100
+                    },
+                    {
+                      "color": "#0d0c0c21",
+                      "value": 100
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Water Level Bar 2"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#0d0c0c21",
+                      "value": null
+                    },
+                    {
+                      "color": "#04b3ce",
+                      "value": 101
+                    },
+                    {
+                      "color": "#0d0c0c21",
+                      "value": 300
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Water Level Bar 3"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#0d0c0c21",
+                      "value": null
+                    },
+                    {
+                      "color": "#0a276c",
+                      "value": 301
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Water Level Variable 1"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "transparent",
+                      "value": null
+                    },
+                    {
+                      "color": "#a8edebb8",
+                      "value": 1
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Water Level Variable 2"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "transparent",
+                      "value": null
+                    },
+                    {
+                      "color": "#a8edebb8",
+                      "value": 34
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Water Level Variable 3"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "transparent",
+                      "value": null
+                    },
+                    {
+                      "color": "#a8edebb8",
+                      "value": 67
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Water Level Variable 4"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "transparent",
+                      "value": null
+                    },
+                    {
+                      "color": "#a8edebb8",
+                      "value": 101
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Water Level Variable 5"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "transparent",
+                      "value": null
+                    },
+                    {
+                      "color": "#a8edebb8",
+                      "value": 201
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Water Level Variable 6"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "transparent",
+                      "value": null
+                    },
+                    {
+                      "color": "#a8edebb8",
+                      "value": 301
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Water Level Variable 7"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "transparent",
+                      "value": null
+                    },
+                    {
+                      "color": "#a8edebb8",
+                      "value": 451
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 7,
+        "x": 17,
+        "y": 1
+      },
+      "id": 11,
+      "options": {
+        "inlineEditing": false,
+        "root": {
+          "background": {
+            "color": {
+              "fixed": "transparent"
+            },
+            "image": {
+              "field": "",
+              "fixed": "",
+              "mode": "fixed"
+            },
+            "size": "cover"
+          },
+          "border": {
+            "color": {
+              "fixed": "transparent"
+            },
+            "width": 6
+          },
+          "constraint": {
+            "horizontal": "left",
+            "vertical": "top"
+          },
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "fill": {
+                  "fixed": "#D9D9D9"
+                },
+                "path": {
+                  "field": "",
+                  "fixed": "https://raw.githubusercontent.com/Achinya-m/Manhole/main/manhole_main_8.svg",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "ฺBackground",
+              "placement": {
+                "height": 600,
+                "left": -0.5,
+                "top": 0,
+                "width": 600
+              },
+              "type": "icon"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Water Level Variable 1",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "text": {
+                  "fixed": ""
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "water_level_1",
+              "placement": {
+                "height": 30,
+                "left": 3.5,
+                "top": -250.5,
+                "width": 446
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Water Level Variable 2",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "water_level_2",
+              "placement": {
+                "height": 29.5,
+                "left": 3.5,
+                "top": -221,
+                "width": 446
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Water Level Variable 3",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "water_level_3",
+              "placement": {
+                "height": 27.5,
+                "left": 3.5,
+                "top": -192.5,
+                "width": 446
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Water Level Variable 4",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "water_level_4",
+              "placement": {
+                "height": 101.5,
+                "left": 120.5,
+                "top": -128.5,
+                "width": 84
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Water Level Variable 5",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "water_level_5",
+              "placement": {
+                "height": 93,
+                "left": 120.5,
+                "top": -31.7,
+                "width": 84
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Water Level Variable 6",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "water_level_6",
+              "placement": {
+                "height": 95,
+                "left": 120.5,
+                "top": 62,
+                "width": 84
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "field": "Water Level Variable 7",
+                  "fixed": "#D9D9D9"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "water_level_7",
+              "placement": {
+                "height": 98,
+                "left": 120.5,
+                "top": 158.5,
+                "width": 84
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "fill": {
+                  "field": "Cover Status",
+                  "fixed": "#D9D9D9"
+                },
+                "path": {
+                  "fixed": "https://raw.githubusercontent.com/Achinya-m/Manhole/main/manhole_cover.svg",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "cover",
+              "placement": {
+                "height": 100,
+                "left": 0.5,
+                "top": 110,
+                "width": 100
+              },
+              "type": "icon"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "fill": {
+                  "field": "Water Level Bar 1",
+                  "fixed": "#D9D9D9"
+                },
+                "path": {
+                  "fixed": "https://raw.githubusercontent.com/Achinya-m/Manhole/main/manhole_bar_level_1.svg",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "Bar_level_1",
+              "placement": {
+                "height": 40,
+                "left": -100,
+                "top": -28,
+                "width": 185
+              },
+              "type": "icon"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "fill": {
+                  "field": "Water Level Bar 2",
+                  "fixed": "#D9D9D9"
+                },
+                "path": {
+                  "fixed": "https://raw.githubusercontent.com/Achinya-m/Manhole/main/manhole_bar_level_2.svg",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "Bar_level_2",
+              "placement": {
+                "height": 40,
+                "left": -102,
+                "top": -28,
+                "width": 185
+              },
+              "type": "icon"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "fill": {
+                  "field": "Water Level Bar 3",
+                  "fixed": "#D9D9D9"
+                },
+                "path": {
+                  "fixed": "https://raw.githubusercontent.com/Achinya-m/Manhole/main/manhole_bar_level_3.svg",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "Bar_level_3",
+              "placement": {
+                "height": 40,
+                "left": -104,
+                "top": -28,
+                "width": 185
+              },
+              "type": "icon"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#686363"
+                },
+                "size": 20,
+                "text": {
+                  "field": "manhole_distance",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "Element 13",
+              "placement": {
+                "height": 50,
+                "left": -144.5,
+                "top": 218,
+                "width": 62
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 20,
+                "text": {
+                  "field": "Cover Status",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "Element 14",
+              "placement": {
+                "height": 50,
+                "left": -132,
+                "top": 111,
+                "width": 95
+              },
+              "type": "metric-value"
+            }
+          ],
+          "name": "Element 1723888218450",
+          "placement": {
+            "height": 100,
+            "left": 0,
+            "top": 0,
+            "width": 100
+          },
+          "type": "frame"
+        },
+        "showAdvancedTypes": false,
+        "zoomAndPan": true
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "dataset": "mpete_manhole",
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_MANHOLE_SQL}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \r\n    ROW_NUMBER() OVER (ORDER BY d.device ASC) AS `No.`,\r\n    d.device AS Device,\r\n    s.location AS Location,\r\n    s.latitude AS Latitude,\r\n    s.longitude AS Longitude,\r\n    s.manhole_distance,\r\n    d.level AS \"Ultrasonic Level\",\r\n    (s.manhole_distance - d.level) AS \"Water Level\",\r\n    -- Additional variables for Water Level\r\n    (s.manhole_distance - d.level) AS \"Water Level Bar 1\",\r\n    (s.manhole_distance - d.level) AS \"Water Level Bar 2\",\r\n    (s.manhole_distance - d.level) AS \"Water Level Bar 3\",\r\n    (s.manhole_distance - d.level) AS \"Water Level Variable 1\",\r\n    (s.manhole_distance - d.level) AS \"Water Level Variable 2\",\r\n    (s.manhole_distance - d.level) AS \"Water Level Variable 3\",\r\n    (s.manhole_distance - d.level) AS \"Water Level Variable 4\",\r\n    (s.manhole_distance - d.level) AS \"Water Level Variable 5\",\r\n    (s.manhole_distance - d.level) AS \"Water Level Variable 6\",\r\n    (s.manhole_distance - d.level) AS \"Water Level Variable 7\",\r\n    d.cover AS \"Cover Status\",\r\n    d.timestamp AS Timestamp\r\nFROM mpete_manhole.data d\r\nJOIN mpete_manhole.setup s\r\n    ON d.device = s.device\r\nWHERE d.timestamp = (\r\n    SELECT MAX(d2.timestamp)\r\n    FROM mpete_manhole.data d2\r\n    WHERE d2.device = d.device\r\n)\r\nAND d.device IN ('$Device')\r\nORDER BY d.device DESC\r\nLIMIT 1;\r\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [
+                  {
+                    "name": "humid",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "manhole_data"
+        }
+      ],
+      "transparent": true,
+      "type": "canvas"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_MANHOLE_SQL}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#f8d10f",
+                "value": 90
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Device"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 81
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5ce1e62b",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cover Status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 147
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5ce1e62b",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 150
+              },
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "Fail": {
+                        "color": "red",
+                        "index": 0
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Water Level"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 99
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#a9dcf55e",
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "cm"
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "min",
+                "value": 0
+              },
+              {
+                "id": "max",
+                "value": 7
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "#5ce1e62b",
+                      "value": null
+                    },
+                    {
+                      "color": "#005085",
+                      "value": 400
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Latitude"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 92
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5ce1e62b",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "decimals",
+                "value": 5
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Longitude"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 104
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5ce1e62b",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "decimals",
+                "value": 5
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Timestamp"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5ce1e62b",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Location"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 182
+              },
+              {
+                "id": "custom.align",
+                "value": "left"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5ce1e62b",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "No."
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 35
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5ce1e62b",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Cover Status"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "color": "#5ce1e62b",
+                        "index": 1,
+                        "text": "Normal"
+                      },
+                      "1": {
+                        "color": "dark-red",
+                        "index": 0,
+                        "text": "FAIL"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Manhole Distance"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 142
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5ce1e62b",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "cm"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Ultrasonic Level"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 133
+              },
+              {
+                "id": "decimals",
+                "value": 1
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#5ce1e62b",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "cm"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 16,
+        "x": 1,
+        "y": 19
+      },
+      "id": 5,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": [],
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "dataset": "mpete_manhole",
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_MANHOLE_SQL}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \r\n    ROW_NUMBER() OVER (ORDER BY d.device ASC) AS `No.`,\r\n    d.device AS Device,\r\n    s.location AS Location,\r\n    s.latitude AS Latitude,\r\n    s.longitude AS Longitude,\r\n    s.manhole_distance AS \"Manhole Distance\",\r\n    d.level AS \"Ultrasonic Level\",\r\n    (s.manhole_distance - d.level) AS \"Water Level\",\r\n    d.cover AS \"Cover Status\",\r\n    d.timestamp AS Timestamp\r\nFROM mpete_manhole.data d\r\nJOIN mpete_manhole.setup s\r\n    ON d.device = s.device\r\nWHERE d.timestamp = (\r\n    SELECT MAX(d2.timestamp)\r\n    FROM mpete_manhole.data d2\r\n    WHERE d2.device = d.device\r\n)\r\nORDER BY d.device ASC;\r\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "mpete_manhole"
+        }
+      ],
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_MANHOLE_SQL}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 7,
+        "x": 17,
+        "y": 19
+      },
+      "id": 12,
+      "options": {
+        "inlineEditing": false,
+        "root": {
+          "background": {
+            "color": {
+              "fixed": "transparent"
+            },
+            "image": {
+              "field": "",
+              "fixed": "",
+              "mode": "field"
+            }
+          },
+          "border": {
+            "color": {
+              "fixed": "dark-green"
+            }
+          },
+          "constraint": {
+            "horizontal": "left",
+            "vertical": "top"
+          },
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "fill": {
+                  "fixed": "#D9D9D9"
+                },
+                "path": {
+                  "fixed": "https://raw.githubusercontent.com/Achinya-m/Manhole/main/manhole_info.svg",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "bg",
+              "placement": {
+                "height": 206,
+                "left": 0.5,
+                "top": -1,
+                "width": 514
+              },
+              "type": "icon"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#00000000"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#434343"
+                },
+                "size": 14,
+                "text": {
+                  "field": "Device",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "Element 2",
+              "placement": {
+                "height": 50,
+                "left": 40.078125,
+                "top": 78,
+                "width": 117
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "left",
+                "color": {
+                  "fixed": "#303132"
+                },
+                "size": 13,
+                "text": {
+                  "field": "Location",
+                  "fixed": "",
+                  "mode": "field"
+                },
+                "valign": "top"
+              },
+              "constraint": {
+                "horizontal": "center",
+                "vertical": "center"
+              },
+              "name": "Element 3",
+              "placement": {
+                "height": 61,
+                "left": -87,
+                "top": 29.5,
+                "width": 320
+              },
+              "type": "metric-value"
+            }
+          ],
+          "name": "Element 1724600114305",
+          "placement": {
+            "height": 100,
+            "left": 0,
+            "top": 0,
+            "width": 100
+          },
+          "type": "frame"
+        },
+        "showAdvancedTypes": false
+      },
+      "pluginVersion": "10.2.3",
+      "targets": [
+        {
+          "dataset": "mpete_manhole",
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_MANHOLE_SQL}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \r\n  device AS Device,\r\n  location AS Location\r\nFROM mpete_manhole.setup\r\nWHERE device IN ('$Device')\r\nORDER BY device DESC\r\nLIMIT 1;\r\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "canvas"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {},
+        "datasource": {
+          "type": "mysql",
+          "uid": "${DS_MANHOLE_SQL}"
+        },
+        "definition": "SELECT \n  device\nFROM mpete_manhole.data\nORDER BY device ASC\nLIMIT 100000000;",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Device",
+        "multi": false,
+        "name": "Device",
+        "options": [],
+        "query": "SELECT \n  device\nFROM mpete_manhole.data\nORDER BY device ASC\nLIMIT 100000000;",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "mysql",
+          "uid": "${DS_MANHOLE_SQL}"
+        },
+        "definition": "SELECT \n  device\nFROM mpete_manhole.data\nORDER BY device ASC\nLIMIT 100000000;",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Device",
+        "multi": false,
+        "name": "Device_MAP",
+        "options": [],
+        "query": "SELECT \n  device\nFROM mpete_manhole.data\nORDER BY device ASC\nLIMIT 100000000;",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "2024-08-26T11:45:39.037Z",
+    "to": "2024-08-26T17:45:39.037Z"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "MWA_Manhole_MPE_DEMO",
+  "uid": "d2c369cd-7cc4-464f-bfa6-f0049ec58782",
+  "version": 266,
+  "weekStart": ""
+}
