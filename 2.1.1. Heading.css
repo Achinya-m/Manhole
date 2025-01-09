@@ -1,0 +1,77 @@
+/* Container ครอบปุ่มทั้งหมดที่มีขนาดเต็ม 100% */
+.button-container {
+  width: 100%;
+  height: 4rem;
+  background-color: #065BAA;
+  padding: 0.5rem;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  display: flex;
+  justify-content: space-between; /* โลโก้อยู่ซ้าย ปุ่มอยู่ขวา */
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Container สำหรับโลโก้และข้อความ */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+/* สไตล์สำหรับ SVG */
+.icon {
+  margin-right: 10px;
+}
+
+/* สไตล์สำหรับข้อความ */
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  font-family: "Poppins", sans-serif; /* เปลี่ยนฟอนต์ที่นี่ */
+}
+
+
+/* Container สำหรับปุ่ม (เรียงต่อกันทางขวา) */
+.button-group {
+  display: flex; /* ใช้ Flexbox ให้ปุ่มเรียงต่อกันในแถวเดียว */
+  gap: 1rem; /* ระยะห่างระหว่างปุ่ม */
+}
+
+/* ปุ่ม */
+.button {
+  height: 2.5rem;
+  padding: 0 2rem;
+  border-radius: 1.5rem;
+  background: #ABE1FA;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #065BAA;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+}
+
+.button:hover::before {
+  transform: scaleX(1);
+}
+
+.button-content {
+  position: relative;
+  z-index: 1;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  width: 100%;
+  height: inherit;
+  border-radius: inherit;
+  background: linear-gradient(82.3deg, #ffffff 10.8%, #ffffff 94.3%);
+  transition: all 0.475s;
+}
