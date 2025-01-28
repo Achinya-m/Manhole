@@ -5,8 +5,6 @@ SELECT
     s.latitude AS Latitude,
     s.longitude AS Longitude,
     s.offset_ultra_level,
-    s.alert_decis AS alert_decis,
-    (s.manhole_distance*(s.alert_decis/100)) AS  alert_decis_cm,
     s.Low_Level,
     s.Medium_Level,
     s.High_Level,
@@ -16,83 +14,88 @@ SELECT
     (s.manhole_distance * (s.High_Level/100)) AS "High_Level_CM",  -- High_Level_CM of s.manhole_distance
     d.Level AS "Ultrasonic Level",
     GREATEST(0, (s.manhole_distance - s.offset_ultra_level - d.level)) AS "Water Level",
-    d.Cover AS "Cover Status",
+    
+    CASE
+            WHEN d.Level2 > s.cover_setup THEN 1
+            WHEN d.Level2 =0 THEN 1
+            ELSE 0
+    END AS "Cover Status",
     d.timestamp AS Timestamp,
     
     -- Water Level Variable 1 
     CASE
         WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (0.01 * s.manhole_distance) THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < 0 THEN 0 
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Low_Level / 100)) THEN 1
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Medium_Level / 100)) THEN 2
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.High_Level / 100)) THEN 3
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) > (s.manhole_distance * (s.High_Level / 100)) THEN 4
-    ELSE 0
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= 0 THEN 0
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.High_Level / 100)) THEN 4
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Medium_Level / 100)) THEN 3
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Low_Level / 100)) THEN 2
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < (s.manhole_distance * (s.Low_Level / 100)) THEN 1
+        ELSE 0
     END AS "Water Level Variable 1",
 
     -- Water Level Variable 2
     CASE 
         WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (0.10 * s.manhole_distance)  THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < 0 THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Low_Level / 100)) THEN 1
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Medium_Level / 100)) THEN 2
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.High_Level / 100)) THEN 3
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) > (s.manhole_distance * (s.High_Level / 100)) THEN 4
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= 0 THEN 0
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.High_Level / 100)) THEN 4
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Medium_Level / 100)) THEN 3
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Low_Level / 100)) THEN 2
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < (s.manhole_distance * (s.Low_Level / 100)) THEN 1
         ELSE 0
     END AS "Water Level Variable 2",
 
     -- Water Level Variable 3
     CASE 
         WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (0.20 * s.manhole_distance) THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < 0 THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Low_Level / 100)) THEN 1
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Medium_Level / 100)) THEN 2
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.High_Level / 100)) THEN 3
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) > (s.manhole_distance * (s.High_Level / 100)) THEN 4 
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= 0 THEN 0
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.High_Level / 100)) THEN 4
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Medium_Level / 100)) THEN 3
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Low_Level / 100)) THEN 2
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < (s.manhole_distance * (s.Low_Level / 100)) THEN 1
         ELSE 0
     END AS "Water Level Variable 3",
 
     -- Water Level Variable 4
     CASE 
         WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (0.30 * s.manhole_distance)  THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < 0 THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Low_Level / 100)) THEN 1
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Medium_Level / 100)) THEN 2
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.High_Level / 100)) THEN 3
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) > (s.manhole_distance * (s.High_Level / 100)) THEN 4
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= 0 THEN 0
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.High_Level / 100)) THEN 4
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Medium_Level / 100)) THEN 3
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Low_Level / 100)) THEN 2
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < (s.manhole_distance * (s.Low_Level / 100)) THEN 1
         ELSE 0
     END AS "Water Level Variable 4",
 
     -- Water Level Variable 5
     CASE 
         WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (0.475 * s.manhole_distance)  THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < 0 THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Low_Level / 100)) THEN 1
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Medium_Level / 100)) THEN 2
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.High_Level / 100)) THEN 3
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) > (s.manhole_distance * (s.High_Level / 100)) THEN 4
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= 0 THEN 0
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.High_Level / 100)) THEN 4
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Medium_Level / 100)) THEN 3
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Low_Level / 100)) THEN 2
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < (s.manhole_distance * (s.Low_Level / 100)) THEN 1
         ELSE 0
     END AS "Water Level Variable 5",
 
     -- Water Level Variable 6
     CASE 
         WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (0.65 * s.manhole_distance) THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < 0 THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Low_Level / 100)) THEN 1
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Medium_Level / 100)) THEN 2
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.High_Level / 100)) THEN 3
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) > (s.manhole_distance * (s.High_Level / 100)) THEN 4
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= 0 THEN 0
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.High_Level / 100)) THEN 4
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Medium_Level / 100)) THEN 3
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Low_Level / 100)) THEN 2
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < (s.manhole_distance * (s.Low_Level / 100)) THEN 1
         ELSE 0
     END AS "Water Level Variable 6",
 
     -- Water Level Variable 7
     CASE 
         WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (0.825 * s.manhole_distance)  THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < 0 THEN 0
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Low_Level / 100)) THEN 1
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.Medium_Level / 100)) THEN 2
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= (s.manhole_distance * (s.High_Level / 100)) THEN 3
-        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) > (s.manhole_distance * (s.High_Level / 100)) THEN 4
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= 0 THEN 0
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.High_Level / 100)) THEN 4
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Medium_Level / 100)) THEN 3
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * (s.Low_Level / 100)) THEN 2
+        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < (s.manhole_distance * (s.Low_Level / 100)) THEN 1
         ELSE 0
     END AS "Water Level Variable 7"
     
