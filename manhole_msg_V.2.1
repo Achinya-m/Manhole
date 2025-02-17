@@ -1,0 +1,26 @@
+{{ define "manhole_msg_V.2.1" }} 
+  {{ $latestAlert := "" }}
+  {{ $latestTimestamp := "" }}
+
+  {{ range .Alerts.Firing }}
+    {{ if eq .Labels.alertname "Manhole_Level_Status_Change" }}
+      {{ if or (eq $latestTimestamp "") (gt .Labels.Timestamp $latestTimestamp) }}
+        {{ $latestAlert = . }}
+        {{ $latestTimestamp = .Labels.Timestamp }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ if $latestAlert }}
+    ⚠️ ระดับน้ำมีการเปลี่ยนแปลงระดับ
+    ({{ $latestAlert.Labels.Previous_Level }} >>> {{ $latestAlert.Labels.Current_Level }})
+
+    อุปกรณ์: {{ $latestAlert.Labels.Device }}
+    ตำแหน่ง: {{ $latestAlert.Labels.Location }}
+    ระดับน้ำ: {{ $latestAlert.Labels.Level }}
+    สถานะฝาท่อ: {{ $latestAlert.Labels.Cover_Status }}
+    แบตเตอรี่: {{ $latestAlert.Labels.Battery_Percentage }}
+
+    Timestamp: {{ $latestAlert.Labels.Timestamp }}
+  {{ end }}
+{{ end }}
