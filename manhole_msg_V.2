@@ -1,0 +1,94 @@
+{{ define "manhole_msg_V.2" }} 
+  {{ $latest_alert := "" }} 
+  {{ $latest_timestamp := "" }} 
+  {{ $latest_alertname := "" }} 
+  {{ $latest_device := "" }} 
+
+  {{ $prev_alertname := "" }}
+  {{ $prev_device := "" }}
+  {{ $prev_timestamp := "" }}
+
+  {{ range .Alerts.Firing }} 
+    {{ if or (eq $latest_timestamp "" ) (gt .Labels.Timestamp $latest_timestamp) }}
+      {{ if or (ne .Labels.alertname $prev_alertname) (ne .Labels.Device $prev_device) (ne .Labels.Timestamp $prev_timestamp) }}
+        {{ $latest_alert = . }} 
+        {{ $latest_timestamp = .Labels.Timestamp }} 
+        {{ $latest_alertname = .Labels.alertname }} 
+        {{ $latest_device = .Labels.Device }} 
+
+        {{ $prev_alertname = .Labels.alertname }}
+        {{ $prev_device = .Labels.Device }}
+        {{ $prev_timestamp = .Labels.Timestamp }}
+      {{ end }}
+    {{ end }} 
+  {{ end }} 
+  {{ if $latest_alert }}
+    {{ if eq $latest_alert.Labels.alertname "Manhole_Level_Alert" }}
+    🚨 ระดับน้ำเกินมาตรฐาน !
+    มีความผิดปกติ กรุณาตรวจสอบ!
+
+    อุปกรณ์: {{ $latest_alert.Labels.Device }}
+    ตำแหน่ง: {{ $latest_alert.Labels.Location }}
+    ระดับน้ำ: {{ $latest_alert.Labels.Level }}
+    สถานะฝาท่อ: {{ $latest_alert.Labels.Cover_Status }}
+    แบตเตอรี่: {{ $latest_alert.Labels.Battery_Percentage }}
+
+    Timestamp: {{ $latest_alert.Labels.Timestamp }}
+    {{ else if eq $latest_alert.Labels.alertname "Manhole_Cover_Alert" }}
+    🚨 ฝาท่อเปิด !
+    มีความผิดปกติ กรุณาตรวจสอบ!
+
+    อุปกรณ์: {{ $latest_alert.Labels.Device }}
+    ตำแหน่ง: {{ $latest_alert.Labels.Location }}
+    ระดับน้ำ: {{ $latest_alert.Labels.Level }}
+    สถานะฝาท่อ: {{ $latest_alert.Labels.Cover_Status }}
+    แบตเตอรี่: {{ $latest_alert.Labels.Battery_Percentage }}
+
+    Timestamp: {{ $latest_alert.Labels.Timestamp }}
+    {{ else if eq $latest_alert.Labels.alertname "Manhole_Battery_Alert" }}
+    🚨 Battery Low <30% !
+    มีความผิดปกติ กรุณาตรวจสอบ!
+
+    อุปกรณ์: {{ $latest_alert.Labels.Device }}
+    ตำแหน่ง: {{ $latest_alert.Labels.Location }}
+    ระดับน้ำ: {{ $latest_alert.Labels.Level }}
+    สถานะฝาท่อ: {{ $latest_alert.Labels.Cover_Status }}
+    แบตเตอรี่: {{ $latest_alert.Labels.Battery_Percentage }} %
+
+    Timestamp: {{ $latest_alert.Labels.Timestamp }}
+    {{ else if eq $latest_alert.Labels.alertname "Manhole_Level_Resolve" }}
+    🟢ระดับน้ำปกติ
+    สถานะกลับมาปกติแล้ว
+
+    อุปกรณ์: {{ $latest_alert.Labels.Device }}
+    ตำแหน่ง: {{ $latest_alert.Labels.Location }}
+    ระดับน้ำ: {{ $latest_alert.Labels.Level }}
+    สถานะฝาท่อ: {{ $latest_alert.Labels.Cover_Status }}
+    แบตเตอรี่: {{ $latest_alert.Labels.Battery_Percentage }}
+
+    Timestamp: {{ $latest_alert.Labels.Timestamp }}
+    {{ else if eq $latest_alert.Labels.alertname "Manhole_Cover_Resolve" }}
+    🟢ฝาท่อปิด
+    สถานะกลับมาปกติแล้ว
+
+    อุปกรณ์: {{ $latest_alert.Labels.Device }}
+    ตำแหน่ง: {{ $latest_alert.Labels.Location }}
+    ระดับน้ำ: {{ $latest_alert.Labels.Level }}
+    สถานะฝาท่อ: {{ $latest_alert.Labels.Cover_Status }}
+    แบตเตอรี่: {{ $latest_alert.Labels.Battery_Percentage }}
+
+    Timestamp: {{ $latest_alert.Labels.Timestamp }}
+    {{ else if eq $latest_alert.Labels.alertname "Manhole_Battery_Resolve" }}
+    🟢Battery High
+    สถานะกลับมาปกติแล้ว
+
+    อุปกรณ์: {{ $latest_alert.Labels.Device }}
+    ตำแหน่ง: {{ $latest_alert.Labels.Location }}
+    ระดับน้ำ: {{ $latest_alert.Labels.Level }}
+    สถานะฝาท่อ: {{ $latest_alert.Labels.Cover_Status }}
+    แบตเตอรี่: {{ $latest_alert.Labels.Battery_Percentage }}
+
+    Timestamp: {{ $latest_alert.Labels.Timestamp }}
+    {{ end }}
+  {{ end }}
+{{ end }}
