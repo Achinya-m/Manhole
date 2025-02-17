@@ -56,6 +56,17 @@
     แบตเตอรี่: {{ $latest_alert.Labels.Battery_Percentage }} %
 
     Timestamp: {{ $latest_alert.Labels.Timestamp }}
+    {{ else if eq $latest_alert.Labels.alertname "Manhole_Level_Status_Change" }}
+    ⚠️ ระดับน้ำมีการเปลี่ยนแปลงระดับ
+    ({{ $latest_alert.Labels.Previous_Level }} >>> {{ $latest_alert.Labels.Current_Level }})
+
+    อุปกรณ์: {{ $latest_alert.Labels.Device }}
+    ตำแหน่ง: {{ $latest_alert.Labels.Location }}
+    ระดับน้ำ: {{ $latest_alert.Labels.Level }}
+    สถานะฝาท่อ: {{ $latest_alert.Labels.Cover_Status }}
+    แบตเตอรี่: {{ $latest_alert.Labels.Battery_Percentage }}
+
+    Timestamp: {{ $latest_alert.Labels.Timestamp }}
     {{ else if eq $latest_alert.Labels.alertname "Manhole_Level_Resolve" }}
     🟢ระดับน้ำปกติ
     สถานะกลับมาปกติแล้ว
