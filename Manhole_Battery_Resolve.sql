@@ -10,9 +10,9 @@ SELECT
     ) AS Level,
     DATE_FORMAT(d.timestamp, '%Y-%m-%d %H:%i:%s') AS Timestamp,
     CASE
-        WHEN d.Cover = 0 THEN 'ฝาท่อปิด'
-        WHEN d.Cover = 1 THEN 'ฝาท่อเปิด'
-        ELSE 'ไม่ทราบสถานะ'
+        WHEN d.Level2 > s.cover_setup THEN 'ฝาท่อเปิด'
+        WHEN d.Level2 = 0 THEN 'ฝาท่อเปิด'
+        ELSE 'ฝาท่อปิด'
     END AS Cover_Status,
     CONCAT(
         CASE 
@@ -23,7 +23,9 @@ SELECT
     ) AS Battery_Percentage,
     CASE
         WHEN prev_d.Counter IS NOT NULL AND ROUND((1 - (prev_d.Counter / 26280)) * 100,1) < 30
-             AND ROUND((1 - (d.Counter / 26280)) * 100,1) >= 30 THEN 1
+             AND ROUND((1 - (d.Counter / 26280)) * 100,1) >= 30
+             AND TIMESTAMPDIFF(MINUTE, d.timestamp, NOW()) < 60  -- ต้องการให้ Resolve ส่งแจ้งเตือนครั้งเดียว หากเกิน 60 นาทีจากปัจจุบันจะหยุดการแจ้งเตือน
+        THEN 1
         ELSE 0
     END AS Resolve_Battery
 
