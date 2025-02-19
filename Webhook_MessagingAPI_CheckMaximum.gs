@@ -9,8 +9,14 @@ function doPost(e) {
   // ดึงข้อมูลจาก JSON ที่ได้รับ
   var alertTitle = data.title; // Template alert อยู่ใน
 
-  // เช็คโควต้าการส่งข้อความ
-  checkMessageQuota(alertTitle);
+  // เช็คจำนวนข้อความที่ใช้ไปแล้ว
+  checkMessageLimit();
+
+  // สร้างข้อความที่ต้องการส่งไปยัง Line
+  var message = alertTitle;
+  
+  // ส่งข้อความไปยัง Line
+  sendMessageToLine(message);
   
   // ส่งคำตอบกลับ
   return ContentService.createTextOutput(
@@ -46,30 +52,29 @@ function sendMessageToLine(message) {
   UrlFetchApp.fetch(url, options);
 }
 
-// เช็คโควต้าการใช้ข้อความ
-function checkMessageQuota(alertTitle) {
+// เช็คจำนวนข้อความที่ส่งไปแล้ว
+function checkMessageLimit() {
   var url = "https://api.line.me/v2/bot/message/quota/consumption";
-  var channelAccessToken = "GVO+IboLn7v0XjBOAmrknGjf+6mSDR5d1oyoCkY+Li1b0AxYnv4hVg81boyQJF9W8Eoa+ztniy+sXAj+yGQl7rkurfeazPczP3IjOf++tsJ2V2LsAIYTPSV806LY9ZNil55OFgLo7FrzQVaCvSkrlgdB04t89/1O/w1cDnyilFU=";
-
   var headers = {
-    "Authorization": "Bearer " + channelAccessToken
+    "Authorization": "Bearer " + "GVO+IboLn7v0XjBOAmrknGjf+6mSDR5d1oyoCkY+Li1b0AxYnv4hVg81boyQJF9W8Eoa+ztniy+sXAj+yGQl7rkurfeazPczP3IjOf++tsJ2V2LsAIYTPSV806LY9ZNil55OFgLo7FrzQVaCvSkrlgdB04t89/1O/w1cDnyilFU="
   };
 
-  var options = {
-    "method": "get",
-    "headers": headers
-  };
-
-  var response = UrlFetchApp.fetch(url, options);
+  var response = UrlFetchApp.fetch(url, { "headers": headers });
   var data = JSON.parse(response.getContentText());
-  
-  var remainingMessages = data.remaining; // จำนวนข้อความที่เหลือ
-  var maxMessages = 75; // ขีดจำกัดข้อความที่สามารถส่งได้
+  var totalUsage = data.totalUsage; // จำนวนข้อความที่ใช้ไปแล้ว
 
-  if (remainingMessages <= 0) {
-    sendMessageToLine("Warning: Maximum message limit reached.");
-  } else {
-    // ส่งข้อความเตือนถ้าใกล้ถึงขีดจำกัด
-    sendMessageToLine(alertTitle);
+  var groupUrl = "https://api.line.me/v2/bot/group/Cef71f19dbc128ee6e41d4c9c830b83c6/members/count";
+  var groupResponse = UrlFetchApp.fetch(groupUrl, { "headers": headers });
+  var groupData = JSON.parse(groupResponse.getContentText());
+  var member = groupData.count; // จำนวนสมาชิกไม่รวม LIne OA
+
+  if (member > 0) { // ป้องกันหารด้วยศูนย์
+    var maxMessages = 300 / member; // ขีดจำกัดสูงสุด (300 ข้อความ/สมาชิก/เดือน)
+    var totalMessages = totalUsage / member; // ตรวจสอบว่าตอนนี้ใช้ไปกี่ข้อความเมื่อนับสมาชิก
+
+    // เช็คว่าจำนวนข้อความใกล้ถึงขีดจำกัด
+    if (totalMessages === maxMessages - 1) {
+      sendMessageToLine("Warning: Maximum message limit is almost reached.");
+    }
   }
 }
