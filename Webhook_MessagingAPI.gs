@@ -7,11 +7,10 @@ function doPost(e) {
   Logger.log(data);
   
   // ดึงข้อมูลจาก JSON ที่ได้รับ
-  var alertmessage = data.title; //payload จาก grafana ใช้ title
-
+  var alertTitle = data.title; // Template alert อยู่ใน
 
   // สร้างข้อความที่ต้องการส่งไปยัง Line
-  var message = alertmessage;
+  var message = alertTitle;
   
   // ส่งข้อความไปยัง Line
   sendMessageToLine(message);
@@ -32,7 +31,7 @@ function sendMessageToLine(message) {
   };
 
   var payload = {
-    "to": "C8d7c476ddd02bd6835f2f1ae982afed4",
+    "to": "Cef71f19dbc128ee6e41d4c9c830b83c6",  //Group: MPE_Group_Manhole_Alert
     "messages": [
       {
         "type": "text",
