@@ -3,6 +3,7 @@ SELECT
     CASE
         WHEN NOW() - INTERVAL 2 HOUR > d.timestamp THEN 3 -- Disconnected: ไม่แจ้งเตือน
         WHEN d.Level2 > s.cover_setup THEN 2 -- ฝาท่อเปิด
+        WHEN d.Level2 = 0 THEN 2  -- ฝาท่อเปิด
         WHEN (s.manhole_distance - s.offset_ultra_level - d.level) >= (s.manhole_distance * (s.Low_level/100)) THEN 1 -- น้ำเกิน
         ELSE 0
     END AS "Manhole Alert",
