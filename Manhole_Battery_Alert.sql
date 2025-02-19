@@ -10,9 +10,9 @@ SELECT
     ) AS Level,
     DATE_FORMAT(d.timestamp, '%Y-%m-%d %H:%i:%s') AS Timestamp,
     CASE
-        WHEN d.Cover = 0 THEN 'ฝาท่อปิด'
-        WHEN d.Cover = 1 THEN 'ฝาท่อเปิด'
-        ELSE 'ไม่ทราบสถานะ'
+        WHEN d.Level2 > s.cover_setup THEN 'ฝาท่อเปิด'
+        WHEN d.Level2 = 0 THEN 'ฝาท่อเปิด'
+        ELSE 'ฝาท่อปิด'
     END AS Cover_Status,
     -- Mapping เปอร์เซ็นต์แบตเตอรี่จาก Counter โดย ส่งทุกๆ 1 ชม. และแบตเตอรี่=0 เมื่อครบ 3 ปี : 24x365x3=26280
     CASE 
