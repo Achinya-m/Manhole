@@ -74,7 +74,8 @@ function checkMessageLimit() {
 
     // เช็คว่าจำนวนข้อความใกล้ถึงขีดจำกัด
     if (totalMessages === maxMessages - 1) {
-      sendMessageToLine("Warning: Maximum message limit is almost reached.");
+      sendMessageToLine("Warning: Maximum message limit is almost reached."); 
     }
   }
 }
+// โค้ดนี่จะใช้ได้สมบูรณ์ถ้า 300/จำนวนสมาชิก ได้เลขจำนวนเต็มไม่มีทศนิยม และ Add Bot เข้ากลุ่มหลังสมาชิกคนอื่นๆ(เพื่อป้องกัน Bot Alert ก่อนสมาชิกครบ) และต้องปิด Auto Respond อื่นๆนกเหนือจาก API
