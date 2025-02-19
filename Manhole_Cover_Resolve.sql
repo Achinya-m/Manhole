@@ -9,9 +9,9 @@ SELECT
     ) AS Level,
     DATE_FORMAT(d.timestamp, '%Y-%m-%d %H:%i:%s') AS Timestamp,
     CASE
-        WHEN d.Cover = 0 THEN 'ฝาท่อปิด'
-        WHEN d.Cover = 1 THEN 'ฝาท่อเปิด'
-        ELSE 'ไม่ทราบสถานะ'
+        WHEN d.Level2 > s.cover_setup THEN 'ฝาท่อเปิด'
+        WHEN d.Level2 = 0 THEN 'ฝาท่อเปิด'
+        ELSE 'ฝาท่อปิด'
     END AS Cover_Status,
     CONCAT(
     -- Mapping เปอร์เซ็นต์แบตเตอรี่จาก Counter โดย ส่งทุกๆ 1 ชม. และแบตเตอรี่=0 เมื่อครบ 3 ปี : 24x365x3=26280
@@ -22,7 +22,21 @@ SELECT
     END, ' %'
     ) AS Battery_Percentage,
     CASE
-        WHEN prev_d.Cover = 1 AND d.Cover = 0 THEN 1
+        WHEN 
+            prev_d.Level2 > s.cover_setup 
+            AND d.Level2 < s.cover_setup
+            AND s.cover_ack = 0 
+            And s.maintenance = 0 
+            AND TIMESTAMPDIFF(MINUTE, d.timestamp, NOW()) < 60 -- ต้องการให้ Resolve ส่งแจ้งเตือนครั้งเดียว หากเกิน 60 นาทีจากปัจจุบันจะหยุดการแจ้งเตือน
+        THEN 1
+        WHEN 
+            prev_d.Level2 = 0 
+            AND d.Level2 > 0 
+            AND d.Level2 < s.cover_setup 
+            AND s.cover_ack = 0 
+            And s.maintenance = 0 
+            AND TIMESTAMPDIFF(MINUTE, d.timestamp, NOW()) < 60 -- ต้องการให้ Resolve ส่งแจ้งเตือนครั้งเดียว หากเกิน 60 นาทีจากปัจจุบันจะหยุดการแจ้งเตือน
+        THEN 1  
         ELSE 0
     END AS Resolve_Cover
 FROM mpete_manhole.data d
