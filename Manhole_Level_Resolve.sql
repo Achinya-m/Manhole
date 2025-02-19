@@ -4,9 +4,9 @@ SELECT
     CONCAT(GREATEST(0, s.manhole_distance - s.offset_ultra_level - d.Level), ' cm') AS Level,
     DATE_FORMAT(d.timestamp, '%Y-%m-%d %H:%i:%s') AS Timestamp,
     CASE
-        WHEN d.Cover = 0 THEN 'ฝาท่อปิด'
-        WHEN d.Cover = 1 THEN 'ฝาท่อเปิด'
-        ELSE 'ไม่ทราบสถานะ'
+        WHEN d.Level2 > s.cover_setup THEN 'ฝาท่อเปิด'
+        WHEN d.Level2 = 0 THEN 'ฝาท่อเปิด'
+        ELSE 'ฝาท่อปิด'
     END AS Cover_Status,
     CONCAT(
         CASE 
@@ -18,7 +18,7 @@ SELECT
     CASE
         WHEN (
             SELECT 
-                GREATEST(0, s.manhole_distance - s.offset_ultra_level - d_prev.Level - (s.manhole_distance * (s.alert_decis / 100)))
+                GREATEST(0, s.manhole_distance - s.offset_ultra_level - d_prev.Level - (s.manhole_distance * (s.Low_Level / 100)))
             FROM 
                 mpete_manhole.data d_prev
             WHERE 
@@ -29,7 +29,9 @@ SELECT
                     WHERE d2.device = d.device AND d2.timestamp < d.timestamp
                 )
         ) > 0
-        AND GREATEST(0, s.manhole_distance - s.offset_ultra_level - d.Level - (s.manhole_distance * (s.alert_decis / 100))) <= 0
+        AND GREATEST(0, s.manhole_distance - s.offset_ultra_level - d.Level - (s.manhole_distance * (s.Low_Level / 100))) <= 0
+        AND s.maintenance = 0
+        AND TIMESTAMPDIFF(MINUTE, d.timestamp, NOW()) < 60 -- ต้องการให้ Resolve ส่งแจ้งเตือนครั้งเดียว หากเกิน 60 นาทีจากปัจจุบันจะหยุดการแจ้งเตือน
         THEN 1
         ELSE 0
     END AS Resolve_Water_Level
