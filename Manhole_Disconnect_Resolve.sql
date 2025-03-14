@@ -18,7 +18,7 @@ SELECT
     ) AS Battery_Percentage,
     CASE
         WHEN prev.timestamp IS NULL THEN 0  -- ถ้าไม่มีข้อมูลก่อนหน้า ถือว่าออนไลน์
-        WHEN TIMESTAMPDIFF(MINUTE, prev.timestamp, d.timestamp) > 120 
+        WHEN TIMESTAMPDIFF(MINUTE, prev.timestamp, d.timestamp) > 230    -- 2 ชม 50
             AND TIMESTAMPDIFF(MINUTE, d.timestamp, NOW()) < 60 THEN 1  -- ต้องการให้ Resolve ส่งแจ้งเตือนครั้งเดียว หากเกิน 60 นาทีจากปัจจุบันจะหยุดการแจ้งเตือน
         ELSE 0
     END AS "Device Status"
