@@ -14,6 +14,15 @@ SELECT
         WHEN d.Level2 = 0 THEN 'ฝาท่อเปิด'
         ELSE 'ฝาท่อปิด'
     END AS Cover_Status,
+
+    CONCAT(
+        CASE 
+            WHEN d.Counter >= 26280 THEN 0
+            WHEN d.Counter <= 0 THEN 100
+            ELSE ROUND((1 - (d.Counter / 26280)) * 100, 1)
+        END, ' %'
+    ) AS Battery_Percentage_Status,
+
     -- Mapping เปอร์เซ็นต์แบตเตอรี่จาก Counter โดย ส่งทุกๆ 1 ชม. และแบตเตอรี่=0 เมื่อครบ 3 ปี : 24x365x3=26280
     CASE 
         WHEN d.Counter >= 26280 THEN 0
