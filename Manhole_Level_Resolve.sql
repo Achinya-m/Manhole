@@ -29,7 +29,7 @@ SELECT
                     WHERE d2.device = d.device AND d2.timestamp < d.timestamp
                 )
         ) > 0
-        AND GREATEST(0, s.manhole_distance - s.offset_ultra_level - d.Level - (s.manhole_distance * (s.Low_Level / 100))) <= 0
+        AND GREATEST(0, s.manhole_distance - s.offset_ultra_level - d.Level - (s.manhole_distance * (s.Low_Level / 100))) < 0
         AND s.maintenance = 0
         AND TIMESTAMPDIFF(MINUTE, d.timestamp, NOW()) < 60 -- ต้องการให้ Resolve ส่งแจ้งเตือนครั้งเดียว หากเกิน 60 นาทีจากปัจจุบันจะหยุดการแจ้งเตือน
         THEN 1
