@@ -26,7 +26,6 @@ SELECT
         ELSE 'Empty'
     END AS Current_Level,
 
-
     -- Previous Level
     CASE
         WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) <= 0 THEN 'Empty'
@@ -37,48 +36,52 @@ SELECT
         ELSE 'Empty'
     END AS Previous_Level,
 
-    -- Level Change Alert (บวก Hysteresis band +-1% ตรง gap-level กันค่าเหวี่ยงขึ้นลง )
+    -- Level Change Alert
     CASE
         WHEN s.maintenance = 1 THEN 0
         ELSE 
             CASE
-                WHEN (
-                    (CASE
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= 0 THEN 'Empty'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * ((s.High_Level + 1) / 100)) THEN 'High Level'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * ((s.Medium_Level + 1) / 100)) THEN 'Medium Level'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * ((s.Low_Level + 1) / 100)) THEN 'Low Level'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < (s.manhole_distance * ((s.Low_Level + 1) / 100)) THEN 'Near Empty'
-                        ELSE 'Empty'
-                    END) != 
-                    (CASE
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) <= 0 THEN 'Empty'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) >= (s.manhole_distance * ((s.High_Level + 1) / 100)) THEN 'High Level'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) >= (s.manhole_distance * ((s.Medium_Level + 1) / 100)) THEN 'Medium Level'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) >= (s.manhole_distance * ((s.Low_Level + 1) / 100)) THEN 'Low Level'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) < (s.manhole_distance * ((s.Low_Level + 1) / 100)) THEN 'Near Empty'
-                        ELSE 'Empty'
-                    END)
-                )
-                OR
+                WHEN 
                 (
-                    (CASE
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= 0 THEN 'Empty'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * ((s.High_Level - 1) / 100)) THEN 'High Level'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * ((s.Medium_Level - 1) / 100)) THEN 'Medium Level'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * ((s.Low_Level - 1) / 100)) THEN 'Low Level'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < (s.manhole_distance * ((s.Low_Level - 1) / 100)) THEN 'Near Empty'
-                        ELSE 'Empty'
-                    END) != 
-                    (CASE
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) <= 0 THEN 'Empty'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) >= (s.manhole_distance * ((s.High_Level - 1) / 100)) THEN 'High Level'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) >= (s.manhole_distance * ((s.Medium_Level - 1) / 100)) THEN 'Medium Level'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) >= (s.manhole_distance * ((s.Low_Level - 1) / 100)) THEN 'Low Level'
-                        WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) < (s.manhole_distance * ((s.Low_Level - 1) / 100)) THEN 'Near Empty'
-                        ELSE 'Empty'
-                    END)
+                    (
+                        (CASE
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= 0 THEN 'Empty'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * ((s.High_Level + 1) / 100)) THEN 'High Level'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * ((s.Medium_Level + 1) / 100)) THEN 'Medium Level'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * ((s.Low_Level + 1) / 100)) THEN 'Low Level'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < (s.manhole_distance * ((s.Low_Level + 1) / 100)) THEN 'Near Empty'
+                            ELSE 'Empty'
+                        END) != 
+                        (CASE
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) <= 0 THEN 'Empty'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) >= (s.manhole_distance * ((s.High_Level + 1) / 100)) THEN 'High Level'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) >= (s.manhole_distance * ((s.Medium_Level + 1) / 100)) THEN 'Medium Level'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) >= (s.manhole_distance * ((s.Low_Level + 1) / 100)) THEN 'Low Level'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) < (s.manhole_distance * ((s.Low_Level + 1) / 100)) THEN 'Near Empty'
+                            ELSE 'Empty'
+                        END)
+                    )
+                OR
+                    (
+                        (CASE
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) <= 0 THEN 'Empty'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * ((s.High_Level - 1) / 100)) THEN 'High Level'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * ((s.Medium_Level - 1) / 100)) THEN 'Medium Level'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) >= (s.manhole_distance * ((s.Low_Level - 1) / 100)) THEN 'Low Level'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d.Level) < (s.manhole_distance * ((s.Low_Level - 1) / 100)) THEN 'Near Empty'
+                            ELSE 'Empty'
+                        END) != 
+                        (CASE
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) <= 0 THEN 'Empty'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) >= (s.manhole_distance * ((s.High_Level - 1) / 100)) THEN 'High Level'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) >= (s.manhole_distance * ((s.Medium_Level - 1) / 100)) THEN 'Medium Level'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) >= (s.manhole_distance * ((s.Low_Level - 1) / 100)) THEN 'Low Level'
+                            WHEN (s.manhole_distance - s.offset_ultra_level - d_prev.Level) < (s.manhole_distance * ((s.Low_Level - 1) / 100)) THEN 'Near Empty'
+                            ELSE 'Empty'
+                        END)
+                    )
                 )
+                AND  TIMESTAMPDIFF(MINUTE, d.timestamp, NOW()) < 60
                 THEN 1
                 ELSE 0
             END
