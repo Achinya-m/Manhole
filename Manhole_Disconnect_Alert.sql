@@ -17,7 +17,7 @@ SELECT
     END, ' %'
     ) AS Battery_Percentage,
     CASE
-        WHEN NOW() - INTERVAL 2 HOUR > d.timestamp THEN 1 -- Disconnected: ไม่แจ้งเตือน
+        WHEN NOW() - INTERVAL 230 MINUTE > d.timestamp THEN 1      -- 2 ชม 50
         ELSE 0
     END AS "Device Status"
 FROM 
