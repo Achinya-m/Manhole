@@ -26,7 +26,7 @@ function doPost(e) {
 
 function sendMessageToLine(message) {
   var url = "https://api.line.me/v2/bot/message/push";
-  var channelAccessToken = "GVO+IboLn7v0XjBOAmrknGjf+6mSDR5d1oyoCkY+Li1b0AxYnv4hVg81boyQJF9W8Eoa+ztniy+sXAj+yGQl7rkurfeazPczP3IjOf++tsJ2V2LsAIYTPSV806LY9ZNil55OFgLo7FrzQVaCvSkrlgdB04t89/1O/w1cDnyilFU=";
+  var channelAccessToken = "yM/mb6oGj0Dh00GRMSRKk8gRSlPyZcQrbLqFWGKSQPuQPhiGHCc4yaKtHMyY0e/CAj91wyMbw8E6vKwpijALs4iOPphfcjWc4QzjZjXVrkDro+bjc9ujdka+4TW70BtaMhKsdJuTQp62ojmaWh54sAdB04t89/1O/w1cDnyilFU=";
 
   var headers = {
     "Content-Type": "application/json",
@@ -34,7 +34,7 @@ function sendMessageToLine(message) {
   };
 
   var payload = {
-    "to": "Cef71f19dbc128ee6e41d4c9c830b83c6",
+    "to": "Cd3003d0914ed172f450a3bc0b29b5ebf",
     "messages": [
       {
         "type": "text",
@@ -56,14 +56,14 @@ function sendMessageToLine(message) {
 function checkMessageLimit() {
   var url = "https://api.line.me/v2/bot/message/quota/consumption";
   var headers = {
-    "Authorization": "Bearer " + "GVO+IboLn7v0XjBOAmrknGjf+6mSDR5d1oyoCkY+Li1b0AxYnv4hVg81boyQJF9W8Eoa+ztniy+sXAj+yGQl7rkurfeazPczP3IjOf++tsJ2V2LsAIYTPSV806LY9ZNil55OFgLo7FrzQVaCvSkrlgdB04t89/1O/w1cDnyilFU="
+    "Authorization": "Bearer " + "yM/mb6oGj0Dh00GRMSRKk8gRSlPyZcQrbLqFWGKSQPuQPhiGHCc4yaKtHMyY0e/CAj91wyMbw8E6vKwpijALs4iOPphfcjWc4QzjZjXVrkDro+bjc9ujdka+4TW70BtaMhKsdJuTQp62ojmaWh54sAdB04t89/1O/w1cDnyilFU="
   };
 
   var response = UrlFetchApp.fetch(url, { "headers": headers });
   var data = JSON.parse(response.getContentText());
   var totalUsage = data.totalUsage; // จำนวนข้อความที่ใช้ไปแล้ว
 
-  var groupUrl = "https://api.line.me/v2/bot/group/Cef71f19dbc128ee6e41d4c9c830b83c6/members/count";
+  var groupUrl = "https://api.line.me/v2/bot/group/Cd3003d0914ed172f450a3bc0b29b5ebf/members/count";
   var groupResponse = UrlFetchApp.fetch(groupUrl, { "headers": headers });
   var groupData = JSON.parse(groupResponse.getContentText());
   var member = groupData.count; // จำนวนสมาชิกไม่รวม LIne OA
@@ -77,5 +77,5 @@ function checkMessageLimit() {
       sendMessageToLine("Warning: Maximum message limit is almost reached."); 
     }
   }
+// โค้ดนี่จะใช้ได้สมบูรณ์ถ้า 300/จำนวนสมาชิก ได้เลขจำนวนเต็มไม่มีทศนิยม และ Add Bot เข้ากลุ่มหลังสมาชิกคนอื่นๆ(เพื่อป้องกัน Bot Alert ก่อนสมาชิกครบ) และต้องปิด Auto Respond อื่นๆนอกเหนือจาก API
 }
-// โค้ดนี่จะใช้ได้สมบูรณ์ถ้า 300/จำนวนสมาชิก ได้เลขจำนวนเต็มไม่มีทศนิยม และ Add Bot เข้ากลุ่มหลังสมาชิกคนอื่นๆ(เพื่อป้องกัน Bot Alert ก่อนสมาชิกครบ) และต้องปิด Auto Respond อื่นๆนกเหนือจาก API
